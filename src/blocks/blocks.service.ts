@@ -1,26 +1,45 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBlockDto } from './dto/create-block.dto';
-import { UpdateBlockDto } from './dto/update-block.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateBlockDto } from "./dto/create-block.dto";
+import { UpdateBlockDto } from "./dto/update-block.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { Block } from "./models/block.model";
+import { TypesService } from "src/types/types.service";
 
 @Injectable()
 export class BlocksService {
+  constructor(
+    @InjectModel(Block) private blockModule: typeof Block,
+    private readonly typeService: TypesService
+  ) {}
+
   create(createBlockDto: CreateBlockDto) {
-    return 'This action adds a new block';
+    return this.blockModule.create(createBlockDto);
   }
 
-  findAll() {
-    return `This action returns all blocks`;
+  findAll(): Promise<Block[]> {
+    return this.blockModule.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} block`;
+  findOne(id: number): Promise<Block | null> {
+    return this.blockModule.findByPk(id);
   }
 
-  update(id: number, updateBlockDto: UpdateBlockDto) {
-    return `This action updates a #${id} block`;
+  async update(
+    id: number,
+    updateBlockDto: UpdateBlockDto
+  ) {
+    const updateblock = await this.blockModule.update(updateBlockDto, {
+      where: { id },
+      returning: true,
+    });
+    return updateblock[1][0];
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} block`;
+  async remove(id: number) {
+    const removeBlock = await this.blockModule.destroy({ where: { id } });
+    if (removeBlock > 0) {
+      return "Cdsfsdfi ";
+    }
+    return "tgdsfhdf";
   }
 }
