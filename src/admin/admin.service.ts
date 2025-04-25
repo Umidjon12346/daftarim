@@ -8,6 +8,7 @@ import { Admin } from "./models/admin.model";
 export class AdminService {
   constructor(@InjectModel(Admin) private adminModel: typeof Admin) {}
 
+  
   create(createAdminDto: CreateAdminDto) {
     return this.adminModel.create(createAdminDto);
   }

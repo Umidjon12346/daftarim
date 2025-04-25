@@ -36,6 +36,7 @@ export class AuthService {
       id: admin.id,
       email: admin.email,
       isActive: admin.is_active,
+      role:"admin"
     };
     return { token: this.jwtService.sign(payload) };
   }

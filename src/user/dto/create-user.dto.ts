@@ -1,23 +1,44 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class CreateUserDto {
-  @IsNotEmpty({ message: "Ism bosh bolmasligi kerak" })
-  @IsString({ message: "Ism matn bolishi kerak" })
+  @ApiProperty({
+    example: "Ali",
+    description: "Foydalanuvchining ismi",
+  })
+  @IsNotEmpty({ message: "Ism bosh bo‘lmasligi kerak" })
+  @IsString({ message: "Ism matn bo‘lishi kerak" })
   first_name: string;
 
-  @IsNotEmpty({ message: "Familiya bosh bolmasligi kerak" })
-  @IsString({ message: "Familiya matn bolishi kerak" })
+  @ApiProperty({
+    example: "Valiyev",
+    description: "Foydalanuvchining familiyasi",
+  })
+  @IsNotEmpty({ message: "Familiya bosh bo‘lmasligi kerak" })
+  @IsString({ message: "Familiya matn bo‘lishi kerak" })
   last_name: string;
 
-  @IsNotEmpty({ message: "Email bosh bolmasligi kerak" })
-  @IsEmail({}, { message: "Email formati notogri" })
+  @ApiProperty({
+    example: "ali.valiyev@example.com",
+    description: "Foydalanuvchining email manzili",
+  })
+  @IsNotEmpty({ message: "Email bosh bo‘lmasligi kerak" })
+  @IsEmail({}, { message: "Email formati noto‘g‘ri" })
   email: string;
 
-  @IsNotEmpty({ message: "Parol bosh bolmasligi kerak" })
-  @MinLength(6, { message: "Parol kamida 6 ta belgidan iborat bolishi kerak" })
+  @ApiProperty({
+    example: "parol123",
+    description: "Kamida 6 ta belgidan iborat parol",
+  })
+  @IsNotEmpty({ message: "Parol bosh bo‘lmasligi kerak" })
+  @MinLength(6, { message: "Parol kamida 6 ta belgidan iborat bo‘lishi kerak" })
   password: string;
 
-  @IsNotEmpty({ message: "Rasm yoq" })
-  @IsString({ message: "Rasm URL matn bolishi kerak" })
+  @ApiProperty({
+    example: "https://example.com/images/user.jpg",
+    description: "Foydalanuvchi rasmi (URL formatida)",
+  })
+  @IsNotEmpty({ message: "Rasm yo‘q" })
+  @IsString({ message: "Rasm URL matn bo‘lishi kerak" })
   photo: string;
 }
