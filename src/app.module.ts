@@ -14,6 +14,10 @@ import { Admin } from "./admin/models/admin.model";
 import { UserModule } from "./user/user.module";
 import { User } from "./user/models/user.model";
 import { AuthModule } from "./auth/auth.module";
+import { RolesModule } from './roles/roles.module';
+import { CommentsModule } from './comments/comments.module';
+import { DevicesModule } from './devices/devices.module';
+import { GroupsModule } from './groups/groups.module';
 
 @Module({
   imports: [
@@ -37,6 +41,10 @@ import { AuthModule } from "./auth/auth.module";
     AdminModule,
     UserModule,
     AuthModule,
+    RolesModule,
+    CommentsModule,
+    DevicesModule,
+    GroupsModule,
   ],
   controllers: [],
   providers: [],

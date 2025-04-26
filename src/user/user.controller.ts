@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -15,6 +17,7 @@ import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../common/guards/jwt-auth.guard";
 import { JwtIsAdminGuard } from "../common/guards/is.admin.guard";
 import { JwtSelfUserGuard } from "../common/guards/user-self.guard";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 
 @ApiTags("User-Foydalanuchi")
@@ -26,8 +29,12 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Foydalanuvchi qo'shish" })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @UseInterceptors(FileInterceptor("photo"))
+  create(
+    @Body() createUserDto: CreateUserDto,
+    @UploadedFile() photo: any
+  ) {
+    return this.userService.create(createUserDto, photo);
   }
 
   @UseGuards(JwtIsAdminGuard)

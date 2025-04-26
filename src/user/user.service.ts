@@ -3,13 +3,17 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { User } from "./models/user.model";
+import { FileService } from "../../file/file.service";
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User) private userModel: typeof User) {}
-
-  create(createUserDto: CreateUserDto) {
-    return this.userModel.create(createUserDto);
+  constructor(
+    @InjectModel(User) private readonly userModel: typeof User,
+    private readonly fileService: FileService
+  ) {}
+  async create(createUserDto: CreateUserDto, photo?: any): Promise<User> {
+    const fileName = await this.fileService.saveFile(photo);
+    return this.userModel.create({ ...createUserDto, photo: fileName });
   }
 
   findAll() {
