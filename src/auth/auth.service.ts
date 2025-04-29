@@ -59,13 +59,13 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException("tekshir nima haxto ");
     }
-    const validPassword = await bcrypt.compare(
-      singinDto.password,
-      user.password
-    );
-    if (!validPassword) {
-      throw new UnauthorizedException("tekshir nima haxto ");
-    }
+    // const validPassword = await bcrypt.compare(
+    //   singinDto.password,
+    //   user.password
+    // );
+    // if (!validPassword) {
+    //   throw new UnauthorizedException("tekshir nima haxto ");
+    // }
     return this.generateuserToken(user);
   }
 

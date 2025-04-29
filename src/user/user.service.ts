@@ -12,8 +12,8 @@ export class UserService {
     private readonly fileService: FileService
   ) {}
   async create(createUserDto: CreateUserDto, photo?: any): Promise<User> {
-    const fileName = await this.fileService.saveFile(photo);
-    return this.userModel.create({ ...createUserDto, photo: fileName });
+    // const fileName = await this.fileService.saveFile(photo);
+    return this.userModel.create( createUserDto );
   }
 
   findAll() {

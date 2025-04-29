@@ -25,8 +25,8 @@ import { FileInterceptor } from "@nestjs/platform-express";
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtIsAdminGuard)
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtIsAdminGuard)
+  // @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Foydalanuvchi qo'shish" })
   @Post()
   @UseInterceptors(FileInterceptor("photo"))
@@ -37,7 +37,7 @@ export class UserController {
     return this.userService.create(createUserDto, photo);
   }
 
-  @UseGuards(JwtIsAdminGuard)
+  // @UseGuards(JwtIsAdminGuard)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Barcha foydalanuvchilarni olish" })
   @Get()

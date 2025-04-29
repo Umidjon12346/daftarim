@@ -5,7 +5,7 @@ interface IUserCreationAttr {
   last_name: string;
   email: string;
   password: string;
-  photo: string;
+  // photo: string;
 }
 
 @Table({ tableName: "users", timestamps: true })
@@ -22,8 +22,8 @@ export class User extends Model<User, IUserCreationAttr> {
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
 
-  @Column({ type: DataType.STRING, allowNull: true })
-  photo: string;
+  // @Column({ type: DataType.STRING, allowNull: true })
+  // photo: string;
 
   @Column({
     type: DataType.BOOLEAN,

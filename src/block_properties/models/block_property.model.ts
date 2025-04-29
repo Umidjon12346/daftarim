@@ -6,7 +6,7 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Block } from "src/blocks/models/block.model";
+import { Block } from "../../blocks/models/block.model";
 import { Property } from "../../properties/models/property.model";
 
 

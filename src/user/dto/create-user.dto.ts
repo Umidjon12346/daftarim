@@ -34,11 +34,11 @@ export class CreateUserDto {
   @MinLength(6, { message: "Parol kamida 6 ta belgidan iborat bo‘lishi kerak" })
   password: string;
 
-  @ApiProperty({
-    example: "https://example.com/images/user.jpg",
-    description: "Foydalanuvchi rasmi (URL formatida)",
-  })
-  @IsNotEmpty({ message: "Rasm yo‘q" })
-  @IsString({ message: "Rasm URL matn bo‘lishi kerak" })
-  photo: string;
+  // @ApiProperty({
+  //   example: "https://example.com/images/user.jpg",
+  //   description: "Foydalanuvchi rasmi (URL formatida)",
+  // })
+  // @IsNotEmpty({ message: "Rasm yo‘q" })
+  // @IsString({ message: "Rasm URL matn bo‘lishi kerak" })
+  // photo: string;
 }
